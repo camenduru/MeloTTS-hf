@@ -113,4 +113,4 @@ class TTS(nn.Module):
         if output_path is None:
             return audio
         else:
-            soundfile.write(output_path, audio, self.hps.data.sampling_rate, format)
+            soundfile.write(output_path, audio, self.hps.data.sampling_rate, format=format)
