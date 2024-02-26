@@ -18,7 +18,7 @@ def split_sentences_latin(text, min_len=10):
     text = re.sub('[“”]', '"', text)
     text = re.sub('[‘’]', "'", text)
     text = re.sub(r"[\<\>\(\)\[\]\"\«\»]+", "", text)
-    return txtsplit(text, 512, 512)
+    return [item.strip() for item in txtsplit(text, 512, 512) if item.strip()]
     # 将文本中的换行符、空格和制表符替换为空格
     # text = re.sub('[\n\t ]+', ' ', text)
     # # 在标点符号后添加一个空格
