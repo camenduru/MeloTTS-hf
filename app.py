@@ -7,9 +7,9 @@ import tempfile
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = TTS(language='EN', device=device)
 speaker_ids = model.hps.data.spk2id
-def synthesize(speaker, text, speed=1.0):
+def synthesize(speaker, text, speed=1.0, progress=gr.Progress()):
     with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as f:
-        model.tts_to_file(text, speaker_ids[speaker], f.name, speed=speed)
+        model.tts_to_file(text, speaker_ids[speaker], f.name, speed=speed, pbar=progress.tqdm)
         return f.name
 with gr.Blocks() as demo:
     gr.Markdown('# MeloTTS\n\nAn unofficial demo of [MeloTTS](https://github.com/myshell-ai/MeloTTS) from MyShell AI. MeloTTS is a permissively licensed (MIT) SOTA multi-speaker TTS model.\n\nI am not affiliated with MyShell AI in any way.\n\nThis demo currently only supports English, but the model itself supports other languages.')
