@@ -20,4 +20,4 @@ with gr.Blocks() as demo:
     btn = gr.Button('Synthesize', variant='primary')
     aud = gr.Audio(interactive=False)
     btn.click(synthesize, inputs=[speaker, text, speed], outputs=[aud])
-demo.queue(api_open=False).launch(show_api=False)
+demo.queue(api_open=False, default_concurrency_limit=10).launch(show_api=False)
