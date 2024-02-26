@@ -7,7 +7,7 @@ import soundfile
 import torchaudio
 import numpy as np
 import torch.nn as nn
-
+from tqdm import tqdm
 from . import utils
 from . import commons
 from .models import SynthesizerTrn
