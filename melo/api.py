@@ -70,13 +70,18 @@ class TTS(nn.Module):
         # print(" > ===========================")
         return texts
 
-    def tts_to_file(self, text, speaker_id, output_path=None, sdp_ratio=0.2, noise_scale=0.6, noise_scale_w=0.8, speed=1.0, pbar=None, format=None):
+    def tts_to_file(self, text, speaker_id, output_path=None, sdp_ratio=0.2, noise_scale=0.6, noise_scale_w=0.8, speed=1.0, pbar=None, format=None, position=None):
         language = self.language
         texts = self.split_sentences_into_pieces(text, language)
         audio_list = []
         tx = texts
         if pbar:
             tx = pbar(texts)
+        else:
+            if position:
+                tx = tqdm(texts, position=position)
+            else:
+                tx = tqdm(texts)
         for t in tx:
             if language in ['EN', 'ZH_MIX_EN']:
                 t = re.sub(r'([a-z])([A-Z])', r'\1 \2', t)
